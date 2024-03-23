@@ -15,6 +15,7 @@ const USERS = [
     { id: 6, name: 'Emily Davis', email: 'emily@example.com' },
     { id: 7, name: 'David Miller', email: 'david@example.com' },
     { id: 8, name: 'Sarah Wilson', email: 'sarah@example.com' },
+    { id: 9, name: 'Sarah Thomas', email: 'SarahThomas@example.com' },
 ]
 
 app.get('/', (req, res) => {
@@ -24,25 +25,19 @@ app.get('/', (req, res) => {
 
 app.get('/users/:name', (req, res) => {
 
-    const name = req.params.name;
-    const user = USERS.find((user) => user.name.toLowerCase() === name.toLowerCase());
+    const userName = req.params.name.toLowerCase();
+    const user = USERS.filter((user) => user.name.toLowerCase().includes(userName));
 
     if (!user) {
-        return res.send('User Not Found');
+        return res.status(404).send('User not found');
     }
     res.send(user);
 })
 
-app.get('/users/:id', (req, res) => {
 
-    const userId = req.params.id;
-    const user = USERS.find((user) => user.id === parseInt(userId));
 
-    if (!user) {
-        return res.send('User Not Found');
-    }
-    res.send(user);
-})
+
+
 
 app.get("/users", (req, res) => {
     res.send(USERS);
