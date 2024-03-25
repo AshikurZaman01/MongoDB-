@@ -25,13 +25,16 @@ async function run() {
         const DB = client.db('Mongo_Practice');
         const userCollection = DB.collection('users');
 
-        app.get('/users', async (req, res) => {
 
-            const user = await userCollection.find({}).toArray();
-            res.send(user);
-            console.log(user)
+        app.post('/users', async (req, res) => {
+
+            const user = req.body;
+            const result = await userCollection.insertOne(user);
+            res.send(result);
 
         })
+
+
 
         await client.db('admin').command({ ping: 1 });
         console.log('Pinged your deployment. You successfully connected to MongoDB!');
