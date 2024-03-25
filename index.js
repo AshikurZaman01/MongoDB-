@@ -29,6 +29,7 @@ async function run() {
 
             const user = await userCollection.find({}).toArray();
             res.send(user);
+            console.log(user)
 
         })
 
