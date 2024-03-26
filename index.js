@@ -25,64 +25,20 @@ async function run() {
         const DB = client.db('Mongo_Practice');
         const userCollection = DB.collection('users');
 
-        app.get('/users', async (req, res) => {
-            const user = await userCollection.find({}).toArray();
-            res.send(user);
-        })
+        app.get('/api/v1/users', async (req, res) => {
 
+            const query = {};
+            const category = req.query.category;
 
-        app.post('/users', async (req, res) => {
-
-            const user = req.body;
-            const result = await userCollection.insertOne(user);
-            res.send(result);
-
-        })
-
-        app.delete('/users/:id', async (req, res) => {
-
-            const id = req.params.id;
-            const query = {
-                _id: new ObjectId(id)
+            if (category) {
+                query.category = category;
             }
 
-            const user = await userCollection.deleteOne(query);
-            console.log(user);
-            res.send(user);
-
-        })
-
-        app.get('/users/:id', async (req, res) => {
-
-            const id = req.body.id;
-            const query = { id: id };
-            const user = await userCollection.findOne(query);
-            console.log(user);
-            res.send(user);
-
-        })
-
-        app.put('/users/:id', async (req, res) => {
-
-            const id = req.params.id;
-            const data = req.body;
-            const query = { _id: new ObjectId(id) }
-            const options = { upsert: true }
-
-            const updatedData = {
-                $set: {
-                    name: data.name,
-                    email: data.email,
-                    like: data.like,
-                    dislike: data.dislike
-                }
-            }
-
-            const result = await userCollection.updateOne(query, updatedData, options);
-            console.log('updated', result);
-
+            const users = userCollection.find(query);
+            const result = await users.toArray();
             res.send(result);
         })
+
 
 
         await client.db('admin').command({ ping: 1 });
