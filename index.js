@@ -46,6 +46,12 @@ async function run() {
 
         })
 
+        app.get('/api/v1/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const user = userCollection.find(query);
+        })
+
 
 
         await client.db('admin').command({ ping: 1 });
