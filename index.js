@@ -27,16 +27,23 @@ async function run() {
 
         app.get('/api/v1/users', async (req, res) => {
 
+
             const query = {};
             const category = req.query.category;
+            const age = req.query.age;
 
             if (category) {
                 query.category = category;
             }
 
-            const users = userCollection.find(query);
-            const result = await users.toArray();
+            if (age) {
+                query.age = age;
+            }
+
+            const user = userCollection.find(query);
+            const result = await user.toArray();
             res.send(result);
+
         })
 
 
