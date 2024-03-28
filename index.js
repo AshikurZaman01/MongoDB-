@@ -25,6 +25,15 @@ async function run() {
         const DB = client.db('Mongo_Practice');
         const userCollection = DB.collection('users');
 
+        app.get('/api/v1/users', async (req, res) => {
+
+
+            const user = userCollection.find().sort({ age: 'desc' });
+            const result = await user.toArray();
+            res.send(result);
+
+        })
+
 
         app.delete('/api/v1/users/:id', async (req, res) => {
 
@@ -36,10 +45,7 @@ async function run() {
         })
 
 
-        app.get('/api/v1/users', async (req, res) => {
-            const user = await userCollection.find({}).toArray();
-            res.send(user);
-        })
+
 
 
 
