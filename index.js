@@ -27,8 +27,18 @@ async function run() {
 
         app.get('/api/v1/users', async (req, res) => {
 
+            let query = {};
+            let sortObj = {};
 
-            const user = userCollection.find().sort({ age: 'desc' });
+            const sortField = req.query.sortField;      //  age
+            const sortOrder = req.query.sortOrder;      // asc
+
+            if (sortField && sortOrder) { //  age asc
+                sortObj[sortField] = sortOrder; // {age: asc}
+            }
+
+
+            const user = userCollection.find().sort(sortObj); //  {age: asc}
             const result = await user.toArray();
             res.send(result);
 
