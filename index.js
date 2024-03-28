@@ -25,31 +25,20 @@ async function run() {
         const DB = client.db('Mongo_Practice');
         const userCollection = DB.collection('users');
 
-        app.get('/api/v1/users', async (req, res) => {
 
+        app.delete('/api/v1/users/:id', async (req, res) => {
 
-            const query = {};
-            const category = req.query.category;
-            const age = req.query.age;
+            const userID = req.params.id;
+            const query = { _id: new ObjectId(userID) };
 
-            if (category) {
-                query.category = category;
-            }
-
-            if (age) {
-                query.age = age;
-            }
-
-            const user = userCollection.find(query);
-            const result = await user.toArray();
+            const result = await userCollection.deleteOne(query);
             res.send(result);
-
         })
 
-        app.get('/api/v1/users/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const user = userCollection.find(query);
+
+        app.get('/api/v1/users', async (req, res) => {
+            const user = await userCollection.find({}).toArray();
+            res.send(user);
         })
 
 
@@ -63,6 +52,10 @@ async function run() {
 }
 
 run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('Hello from MongoDB');
+})
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
