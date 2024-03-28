@@ -28,17 +28,13 @@ async function run() {
         app.get('/api/v1/users', async (req, res) => {
 
             let query = {};
-            let sortObj = {};
 
-            const sortField = req.query.sortField;      //  age
-            const sortOrder = req.query.sortOrder;      // asc
-
-            if (sortField && sortOrder) { //  age asc
-                sortObj[sortField] = sortOrder; // {age: asc}
-            }
+            const page = Number(req.query.page);
+            const limit = Number(req.query.limit);
+            const skip = (page - 1) * limit;
 
 
-            const user = userCollection.find().sort(sortObj); //  {age: asc}
+            const user = userCollection.find().skip(skip).limit(limit)
             const result = await user.toArray();
             res.send(result);
 
