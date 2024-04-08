@@ -1,14 +1,19 @@
 
-const EventEmitter = require('node:events');
+const Events = require('node:events');
 
-class MyBirthDay extends EventEmitter { }
+class myEvents extends Events { }
 
-const birthDay1 = new MyBirthDay();
+const myEmitter = new myEvents();
 
-// create event listeners
-birthDay1.on('birthDay', () => {
-    console.log('Happy Birthday kakku');
+myEmitter.on('day', () => {
+    console.log('It is a my birthday');
 })
 
-// emitting an event
-birthDay1.emit('birthDay');
+myEmitter.on('day', (gift) => {
+    console.log(`I will send a gift ${gift}`);
+})
+
+
+
+myEmitter.emit('day', 'bike');
+
