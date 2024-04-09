@@ -5,6 +5,8 @@ const path = require('path');
 
 const filePath = path.join(__dirname, 'hello.txt');
 
-const file = fs.readFileSync(filePath, 'utf-8');
+fs.writeFileSync(filePath, 'ki koro , valo aco , mone ki pore na amake',);
 
-console.log(file);
+const fileCOn = fs.readFileSync(filePath, "utf-8");
+
+console.log(fileCOn);
