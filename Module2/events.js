@@ -1,19 +1,10 @@
+const fs = require('fs');
+const path = require('path');
 
-const Events = require('node:events');
+// Use path.join to correctly concatenate directory and file name
+const filePath = path.join(__dirname, 'hello.txt');
 
-class myEvents extends Events { }
+// Read file synchronously
+const file = fs.readFileSync(filePath, 'utf-8');
 
-const myEmitter = new myEvents();
-
-myEmitter.on('day', () => {
-    console.log('It is a my birthday');
-})
-
-myEmitter.on('day', (gift) => {
-    console.log(`I will send a gift ${gift}`);
-})
-
-
-
-myEmitter.emit('day', 'bike');
-
+console.log(file);
