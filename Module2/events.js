@@ -4,8 +4,8 @@ const path = require('path');
 
 const filePath = path.join(__dirname, 'hello.txt');
 
-fs.writeFileSync(filePath, 'Hello, Node.js');
+// Asynchronous
+fs.writeFileSync(filePath, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lol , Lol')
 
-const fileContent = fs.readFileSync(filePath, 'utf-8');
-
-console.log(fileContent);
+const file = fs.readFileSync(filePath, 'utf-8');
+console.log(file);
