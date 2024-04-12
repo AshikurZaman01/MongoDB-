@@ -2,11 +2,17 @@
 const fs = require('fs');
 const path = require('path');
 
+const filePath = path.join(__dirname, 'hello.txt');
 
-const fs = require('fs');
-const path = require('path');
+console.log('Before');
 
+const file = fs.readFile(filePath, 'utf-8', (err, data) => {
 
-const fs = require('fs');
-const path = require('path');
+    if (err) {
+        throw new Error('File not found');
+    }
+    console.log(data);
 
+})
+
+console.log('After');
