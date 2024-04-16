@@ -1,11 +1,16 @@
 // foreach , find , filter , map , indexOf , reduce
 
-const arr = [1, 2, 3, 4, 5];
+const arr = [10, 23, 13, 44.5, 50, -100];
 
-const doubleArr = [];
 
-const mp = arr.map((item) => {
-    doubleArr.push(item)
+const fil = arr.filter((element) => {
+
+    if (element > 20) {
+        return true;
+    } else {
+        return false;
+    }
+
 })
 
-console.log(doubleArr);
+console.log(fil);
