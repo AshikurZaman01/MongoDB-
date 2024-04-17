@@ -1,11 +1,13 @@
 
-const fs = require('fs');
-const path = require('path');
+const EventEmitter = require('node:events');
 
-const filePath = path.join(__dirname, 'hello.txt');
+class MyEmitter extends EventEmitter { }
 
-// Asynchronous
-fs.writeFileSync(filePath, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lol , Lol')
+const myEmitter1 = new MyEmitter();
 
-const file = fs.readFileSync(filePath, 'utf-8');
-console.log(file);
+myEmitter1.on('event', () => {
+    console.log('Happy birthday to me');
+})
+
+myEmitter1.emit('event');
+

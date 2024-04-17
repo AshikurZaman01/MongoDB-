@@ -1,16 +1,11 @@
-// foreach , find , filter , map , indexOf , reduce
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
-const arr = [10, 23, 13, 44.5, 50, -100];
-
-
-const fil = arr.filter((element) => {
-
-    if (element > 20) {
-        return true;
-    } else {
-        return false;
-    }
-
+app.get('/', (req, res) => {
+    res.send('Hello World!');
 })
 
-console.log(fil);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
