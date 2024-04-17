@@ -2,9 +2,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const filepath = path.join(__dirname, 'hello.txt');
+const filePath = path.join(__dirname, 'hello.txt');
 
-// synchronous read
-const file = fs.readFileSync(filepath, 'utf-8');
+// Synchronous read
 
-console.log(file);
+const file = fs.readFile(filePath, 'utf-8', (err, datt) => {
+    if (err) {
+        throw new Error('File not found');
+    }
+    console.log(datt);
+
+})
+
