@@ -1,18 +1,22 @@
 
+
 const fs = require('fs');
 const path = require('path');
 
-const readFilePath = path.join(__dirname, 'hello.txt');
-const writeFilePath = path.join(__dirname, 'write.txt');
+const readpath = path.join(__dirname, 'hello.txt');
+const writepath = path.join(__dirname, 'write.txt');
 
-fs.readFile(readFilePath, 'utf-8', (err, data) => {
-    if (err) {
-        throw new Error('no found');
-    }
 
-    fs.writeFile(writeFilePath, data, (err) => {
+const readableStream = fs.createReadStream(readpath, 'utf-8');
+
+readableStream.on('data', (data) => {
+    console.log(data);
+
+    const writeStream = fs.createWriteStream(writepath);
+
+    writeStream.write(data, (err) => {
         if (err) {
-            throw new Error('no found');
+            console.log(err);
         }
     })
 })
