@@ -2,15 +2,17 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = path.join(__dirname, 'hello.txt');
+const readFilePath = path.join(__dirname, 'hello.txt');
+const writeFilePath = path.join(__dirname, 'write.txt');
 
-// Synchronous read
-
-const file = fs.readFile(filePath, 'utf-8', (err, datt) => {
+fs.readFile(readFilePath, 'utf-8', (err, data) => {
     if (err) {
-        throw new Error('File not found');
+        throw new Error('no found');
     }
-    console.log(datt);
 
+    fs.writeFile(writeFilePath, data, (err) => {
+        if (err) {
+            throw new Error('no found');
+        }
+    })
 })
-
