@@ -14,9 +14,5 @@ readableStream.on('data', (data) => {
 
     const writeStream = fs.createWriteStream(writepath);
 
-    writeStream.write(data, (err) => {
-        if (err) {
-            console.log(err);
-        }
-    })
+   
 })
