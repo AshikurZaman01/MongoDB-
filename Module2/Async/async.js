@@ -1,18 +1,13 @@
 
+const http = require('node:http');
 
-const fs = require('fs');
-const path = require('path');
+const server = http.createServer((req, res) => {
 
-const readpath = path.join(__dirname, 'hello.txt');
-const writepath = path.join(__dirname, 'write.txt');
+    res.end('Hello form server');
 
 
-const readableStream = fs.createReadStream(readpath, 'utf-8');
+})
 
-readableStream.on('data', (data) => {
-    console.log(data);
-
-    const writeStream = fs.createWriteStream(writepath);
-
-   
+server.listen(3000, () => {
+    console.log('Server is running at port 3000');
 })
