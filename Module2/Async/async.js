@@ -1,6 +1,8 @@
 
 const http = require('http');
 const url = require('url');
+const url = require('url');
+const url = require('url');
 
 const data = [
     { id: 1, name: 'Anis', age: 50 },
