@@ -10,6 +10,7 @@ const data = [
     { id: 3, name: 'Karim', age: 50 },
     { id: 4, name: 'Jahid', age: 50 },
     { id: 5, name: 'Raju', age: 50 },
+    { id: 6, name: 'Raju', age: 50 },
 ]
 
 
